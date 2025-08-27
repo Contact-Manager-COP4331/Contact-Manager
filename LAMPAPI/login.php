@@ -1,5 +1,5 @@
 
-//need to change the database name to what it will be called. Looks very similar to the example we did in classs
+
 <?php
 
 $inData = getRequestInfo();
@@ -8,7 +8,7 @@ $id = 0;
 $firstName = "";
 $lastName = "";
 
-$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "DatabaseName"); 
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119"); 
 
 if( $conn->connect_error )
 	{
