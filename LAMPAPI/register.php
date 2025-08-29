@@ -9,7 +9,7 @@
 	// Hash the password
 	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119");
 	if ($conn->connect_error) 
 	{
 		returnWithError($conn->connect_error);
