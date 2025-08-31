@@ -42,7 +42,7 @@ if ($check->num_rows > 0) {
 $check->close();
 
 // Prepare insert statement
-$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, login, password) VALUES (?, ?, ?, ?)");
 if (!$stmt) {
     returnWithError("Prepare failed: " . $conn->error);
     $conn->close();
@@ -53,7 +53,7 @@ if (!$stmt) {
 $stmt->bind_param("ssss", $firstName, $lastName, $login, $hashedPassword);
 
 if ($stmt->execute()) {
-    echo json_encode(["message" => "User added successfully."]);
+    echo json_encode(["message" => "User registered successfully."]);
 } else {
     returnWithError("Error inserting user: " . $stmt->error);
 }
