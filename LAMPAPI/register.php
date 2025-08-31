@@ -42,7 +42,7 @@ if ($check->num_rows > 0) {
 $check->close();
 
 // Prepare insert statement
-$stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, login, password) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
 if (!$stmt) {
     returnWithError("Prepare failed: " . $conn->error);
     $conn->close();
