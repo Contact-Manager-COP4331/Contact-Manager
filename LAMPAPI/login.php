@@ -23,7 +23,14 @@ else
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			if(password_verify($password, $row["Password"]))
+			{
+				returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			}
+			else
+			{
+				returnWithError("Incorrect password")
+			}
 		}
 		else
 		{
