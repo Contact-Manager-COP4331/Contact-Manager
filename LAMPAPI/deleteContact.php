@@ -13,11 +13,19 @@
 
 		if ($stmt->execute())
 		{
-			returnWithError(""); // success = no error
+			//message to tell if contact was deleted or not
+			if($stmt->affected_rows > 0)
+			{
+				returnWithInfo("Contact deleted");
+			}
+			else
+			{
+				returnWithInfo("No contact found");
+			}
 		}
 		else
 		{
-			returnWithError("Insert failed");
+			returnWithError("Deletion failed");
 		}
 
 		$stmt->close();
@@ -39,5 +47,11 @@
 	{
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson($retValue);
+	}
+
+	function returnWithInfo( $deleteResults )
+	{
+		$retValue = '{"results":"' . $deleteResults . '"}';
+		sendResultInfoAsJson( $retValue );
 	}
 ?>
