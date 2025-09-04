@@ -8,7 +8,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts Where (FirstName, LastName, UserID) VALUES (?,?,?)");
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE (FirstName, LastName, UserID) VALUES (?,?,?)");
 		$stmt->bind_param("ssi", $inData["firstName"], $inData["lastName"], $inData["userId"]);
 
 		if ($stmt->execute())
