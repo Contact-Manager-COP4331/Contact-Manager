@@ -29,12 +29,12 @@ else
 			}
 			else
 			{
-				returnWithError("Incorrect Password");
+				returnWithError("Incorrect password");
 			}
 		}
 		else
 		{
-			returnWithError("No Records Found");
+			returnWithError("No records found");
 		}
 
 		$stmt->close();
