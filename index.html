@@ -1,0 +1,31 @@
+<html>
+<head>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+</head>
+<body>
+
+<button type="button" id="rlButton" onclick="rlSwitch();"> L/R </button>
+
+<div id="loginDiv" class="display">
+	<span id="inner-title">LOG IN</span>
+	<input type="text" id="loginName" placeholder="Username" /><br />
+	<input type="password" id="loginPassword" placeholder="Password"/><br />
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button><br />
+	<span id="loginResult"></span>
+</div>
+
+<div id="registerDiv" class="display active">
+	<span id="inner-title">REGISTER</span>
+	<input type="text" id="firstName" placeholder="First Name" /><br />
+	<input type="text" id="lastName" placeholder="Last Name" /><br />
+	<input type="text" id="registerName" placeholder="Username" /><br />
+	<input type="password" id="registerPassword" placeholder="Password"/><br />
+	<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button><br />
+	<span id="registerResult"></span>
+</div>
+
+</body>
+</html>
