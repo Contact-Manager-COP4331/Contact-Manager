@@ -58,7 +58,7 @@ function doRegister()
 				window.lastName = lastName;
 
 				saveCookie();
-				window.location.href = "color.html";
+				window.location.href = "contact.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -110,7 +110,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contact.html";
 			}
 		};
 		xhr.send(jsonPayload);
