@@ -62,12 +62,12 @@ $check->close();
 // ----------------------
 // 4. Insert new contact with current date
 // ----------------------
-$dateCreated = date("Y-m-d H:i:s"); // current date/time
+$CreatedAt = date("Y-m-d H:i:s"); // current date/time
 
 $stmt = $conn->prepare(
-    "INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID, DateCreated) VALUES (?,?,?,?,?,?)"
+    "INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID, CreatedAt) VALUES (?,?,?,?,?,?)"
 );
-$stmt->bind_param("ssssis", $firstName, $lastName, $phone, $email, $userId, $dateCreated);
+$stmt->bind_param("ssssis", $firstName, $lastName, $phone, $email, $userId, $CreatedAt);
 
 if ($stmt->execute()) {
     sendResultInfoAsJson('{"error":""}'); // success
