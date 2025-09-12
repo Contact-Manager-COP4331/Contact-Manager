@@ -10,14 +10,8 @@ function switchDiv(id1,id2)
 	const div1 = document.getElementById(id1);
 	const div2 = document.getElementById(id2);
 
-	if (div1.classList.contains("active")) {
-		div1.classList.remove("active");
-		div2.classList.add("active");
-	}
-	else {
-		div2.classList.remove("active");
-		div1.classList.add("active");
-	}
+	div1.classList.toggle("d-none");
+	div2.classList.toggle("d-none");
 }
 
 function doRegister()
@@ -177,7 +171,7 @@ function addColor()
 	let newColor = document.getElementById("colorText").value;
 	document.getElementById("colorAddResult").innerHTML = "";
 
-	let tmp = {color:newColor,userId,userId};
+	let tmp = {color:newColor,userId:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddColor.' + extension;

@@ -2,30 +2,40 @@
 <head>
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-<button type="button" id="rlButton" class="switchButtons" onclick="switchDiv('loginDiv','registerDiv');"> Login/Register </button>
+<button type="button" id="rlButton" class="btn btn-outline-secondary w-100 my-3" onclick="switchDiv('loginDiv','registerDiv');"> Login/Register </button>
 
-<div id="loginDiv" class="display">
-	<span id="inner-title">LOG IN</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button><br />
-	<span id="loginResult"></span>
+<div id="loginDiv" class="d-none">
+	<div class="card shadow-sm">
+		<div class="card-body">
+			<span class="h4 d-block text-center mb-4">LOG IN</span>
+			<input type="text" id="loginName" placeholder="Username" class="form-control mb-3"/>
+			<input type="password" id="loginPassword" placeholder="Password" class="form-control mb-3"/>
+			<button type="button" id="loginButton" class="btn btn-primary w-100" onclick="doLogin();"> Login </button>
+			<div id="loginResult" class="alert alert-danger mt-3 d-none" role="status"></div>
+		</div>
+	</div>
 </div>
 
-<div id="registerDiv" class="display active">
-	<span id="inner-title">REGISTER</span>
-	<input type="text" id="firstName" placeholder="First Name" /><br />
-	<input type="text" id="lastName" placeholder="Last Name" /><br />
-	<input type="text" id="registerName" placeholder="Username" /><br />
-	<input type="password" id="registerPassword" placeholder="Password"/><br />
-	<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button><br />
-	<span id="registerResult"></span>
+<div id="registerDiv" class="">
+	<div class="card shadow-sm">
+		<div class="card-body">
+			<span class="h4 d-block text-center mb-4">REGISTER</span>
+			<input type="text" id="firstName" placeholder="First Name" class="form-control mb-3"/>
+			<input type="text" id="lastName" placeholder="Last Name" class="form-control mb-3"/>
+			<input type="text" id="registerName" placeholder="Username" class="form-control mb-3"/>
+			<input type="password" id="registerPassword" placeholder="Password" class="form-control mb-3"/>
+			<button type="button" id="registerButton" class="btn btn-success w-100" onclick="doRegister();"> Register </button>
+			<div id="registerResult" class="alert alert-danger mt-3 d-none" role="status"></div>
+		</div>
+	</div>
 </div>
 
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

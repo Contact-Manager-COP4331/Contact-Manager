@@ -1,6 +1,7 @@
 <html>
 <head>
 	<script type="text/javascript" src="js/code.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
@@ -12,44 +13,48 @@
 	</script>
 	
 </head>
-<body>
+<body class="bg-light">
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+<div id="loggedInDiv" class="card shadow-sm p-3 mb-3">
+	<span id="userName"></span>
+	<button type="button" id="logoutButton" class="btn btn-outline-secondary ms-3" onclick="doLogout();"> Log Out </button>
 </div>
 
-<button type="button" id="aeButton" class="switchButtons" onclick="switchDiv('accessUIDiv','addUIDiv');"> Add/Edit </button>
+<button type="button" id="aeButton" class="btn btn-outline-secondary w-100 my-3" onclick="switchDiv('accessUIDiv','addUIDiv');"> Add/Edit </button>
 
-<div id="accessUIDiv" class="display active">
-	<br />
+<div id="accessUIDiv" class="">
+	<div class="card shadow-sm">
+		<div class="card-body">
+			<input type="text" id="searchText" placeholder="Contact To Search For" class="form-control mb-3"/>
+			<button type="button" id="searchContactButton" class="btn btn-primary w-100 mb-3" onclick="searchContact();"> Search Contact </button>
+			<span id="contactSearchResult" class="d-block mb-3"></span>
+			<p id="contactList" class="mb-4"></p>
 
-	<input type="text" id="searchText" placeholder="Contact To Search For"/>
-	<button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
-	<span id="contactSearchResult"></span>
-	<p id="contactList">
-	</p><br /><br />
+			<input type="text" id="deleteText" placeholder="Contact To Delete" class="form-control mb-3">
+			<button type="button" id="deleteContactButton" class="btn btn-danger w-100 mb-3" onclick="deleteContact();"> Delete Contact </button>
+			<span id="contactDeleteResult" class="d-block mb-4"></span>
 
-	<input type="text" id="deleteText" placeholder="Contact To Delete">
-	<button type="button" id="deleteContactButton" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
-	<span id="contactDeleteResult"></span> <br /><br />
-
-	<input type="text" id="editText" placeholder="Contact To Edit">
-	<button type="button" id="editContactButton" class="buttons" onclick="editContact();"> Edit Contact </button><br />
-	<span id="contactEditResult"></span>
+			<input type="text" id="editText" placeholder="Contact To Edit" class="form-control mb-3">
+			<button type="button" id="editContactButton" class="btn btn-warning w-100 mb-3" onclick="editContact();"> Edit Contact </button>
+			<span id="contactEditResult" class="d-block"></span>
+		</div>
+	</div>
 </div>
 
-<div id="addUIDiv" class="display">
-	<br />
-
-	<input type="text" id="firstNameAdd" placeholder="First Name" /><br />
-	<input type="text" id="lastNameAdd" placeholder="Last Name" /><br />
-	<input type="email" id="emailAdd" placeholder="Email" /><br />
-	<input type="tel" id="phoneAdd" placeholder="Phone Number"/><br />
-	<input type="date" id="dateAdd" placeholder="Current Date"/><br />
-	<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-	<span id="contactAddResult"></span>
+<div id="addUIDiv" class="d-none mt-3">
+	<div class="card shadow-sm">
+		<div class="card-body">
+			<input type="text" id="firstNameAdd" placeholder="First Name" class="form-control mb-3"/>
+			<input type="text" id="lastNameAdd" placeholder="Last Name" class="form-control mb-3"/>
+			<input type="email" id="emailAdd" placeholder="Email" class="form-control mb-3"/>
+			<input type="tel" id="phoneAdd" placeholder="Phone Number" class="form-control mb-3"/>
+			<input type="date" id="dateAdd" placeholder="Current Date" class="form-control mb-3"/>
+			<button type="button" id="addContactButton" class="btn btn-success w-100 mb-3" onclick="addContact();"> Add Contact </button>
+			<span id="contactAddResult" class="d-block"></span>
+		</div>
+	</div>
 </div>
 
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
