@@ -1,76 +1,78 @@
 <?php
-session_start(); // Start session to identify logged-in user
+session_start(); // Identify the logged-in user
 
-// Make sure user is signed in
+// --- 0. Require login ---
 if (!isset($_SESSION['userId'])) {
     returnWithError("User not signed in.");
     exit;
 }
 
-$userId = $_SESSION['userId']; // signed-in user's ID
+$userId = $_SESSION['userId'];
 
-// Get input data from front end (JSON)
-$inData = getRequestInfo();
+// --- 1. Read and validate input ---
+$inData    = getRequestInfo();
 $firstName = trim($inData["firstName"]);
 $lastName  = trim($inData["lastName"]);
 $phone     = trim($inData["phone"]);
 $email     = trim($inData["email"]);
 
-// ----------------------
-// 1. Validate inputs
-// ----------------------
-
-// Validate email
+// Email format
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     returnWithError("Invalid email format.");
     exit;
 }
 
-// Validate phone number (digits, +, -, spaces, parentheses, 7-20 chars)
+// Phone number (digits, +, -, spaces, parentheses, 7–20 chars)
 if (!preg_match('/^\+?[0-9\s\-\(\)]{7,20}$/', $phone)) {
     returnWithError("Invalid phone number format.");
     exit;
 }
 
-// ----------------------
-// 2. Connect to database
-// ----------------------
+// --- 2. Connect to database ---
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119");
 if ($conn->connect_error) {
     returnWithError("Database connection failed: " . $conn->connect_error);
     exit;
 }
 
-// ----------------------
-// 3. Check for duplicate contact
-// ----------------------
+// --- 3. Check for duplicates ---
 $check = $conn->prepare(
-    "SELECT ID FROM Contacts WHERE FirstName=? AND LastName=? AND Phone=? AND Email=? AND UserID=?"
+    "SELECT ID FROM Contacts
+     WHERE FirstName=? AND LastName=? AND Phone=? AND Email=? AND UserID=?"
 );
 $check->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
 $check->execute();
 $check->store_result();
 
 if ($check->num_rows > 0) {
-    returnWithError("Contact already exists for this user.");
     $check->close();
     $conn->close();
+    returnWithError("Contact already exists for this user.");
     exit;
 }
 $check->close();
 
-// ----------------------
-// 4. Insert new contact with current date
-// ----------------------
-$CreatedAt = date("Y-m-d H:i:s"); // current date/time
+// --- 4. Insert new contact with timestamps ---
+$now = date("Y-m-d H:i:s"); // current date/time for both CreatedAt & UpdatedAt
 
 $stmt = $conn->prepare(
-    "INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID, CreatedAt) VALUES (?,?,?,?,?,?)"
+    "INSERT INTO Contacts
+     (FirstName, LastName, Phone, Email, UserID, CreatedAt, UpdatedAt)
+     VALUES (?,?,?,?,?,?,?)"
 );
-$stmt->bind_param("ssssis", $firstName, $lastName, $phone, $email, $userId, $CreatedAt);
+$stmt->bind_param(
+    "ssssiss",
+    $firstName,
+    $lastName,
+    $phone,
+    $email,
+    $userId,
+    $now,   // CreatedAt
+    $now    // UpdatedAt (initially same as CreatedAt)
+);
 
 if ($stmt->execute()) {
-    sendResultInfoAsJson('{"error":""}'); // success
+    sendResultInfoAsJson('{"error":""}');
 } else {
     returnWithError("Insert failed: " . $stmt->error);
 }
@@ -78,8 +80,9 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 
+
 // ----------------------
-// 5. Helper functions
+// Helper functions
 // ----------------------
 function getRequestInfo() {
     return json_decode(file_get_contents('php://input'), true);
@@ -95,4 +98,3 @@ function returnWithError($err) {
     sendResultInfoAsJson($retValue);
 }
 ?>
-
