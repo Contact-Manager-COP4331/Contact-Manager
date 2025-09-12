@@ -5,18 +5,18 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-function rlSwitch()
+function switchDiv(id1,id2)
 {
-	const loginDiv = document.getElementById("loginDiv");
-	const registerDiv = document.getElementById("registerDiv");
+	const div1 = document.getElementById(id1);
+	const div2 = document.getElementById(id2);
 
-	if (loginDiv.classList.contains("active")) {
-		loginDiv.classList.remove("active");
-		registerDiv.classList.add("active");
+	if (div1.classList.contains("active")) {
+		div1.classList.remove("active");
+		div2.classList.add("active");
 	}
 	else {
-		registerDiv.classList.remove("active");
-		loginDiv.classList.add("active");
+		div2.classList.remove("active");
+		div1.classList.add("active");
 	}
 }
 
@@ -159,7 +159,7 @@ function readCookie()
 	}
 	else
 	{
-//		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
@@ -230,7 +230,7 @@ function searchContact()
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
 					let c = jsonObject.results[i];
-					contactList += c.firstName + " " + c.lastName + " - " + c.email + " - " + c.phone;
+					contactList += c.firstName + " " + c.lastName + " - " + c.email + " - " + c.phone + " - " + c.dateCreated;
 					if( i < jsonObject.results.length - 1 )
 					{
 						contactList += "<br />\r\n";

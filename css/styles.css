@@ -59,6 +59,15 @@ body
     background-color: #b2b2b2;
 }
 
+#addUIDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+
 .buttons
 {
     font-size: 30px;
@@ -75,17 +84,17 @@ body
     opacity: 50%;
 }
 
-#rlButton
+.switchButtons
 {
     font-size: 25px;
     border-radius: 25px;
-    width: 10%;
+    width: 20%;
     margin-top: 5%;
     margin-left: 5%;
     font-family: 'Ubuntu', sans-serif;
 }
 
-#rlButton:hover{
+.switchButtons:hover{
     background-color: #00d5124f;
     color: #FFFFFF;
     opacity: 50%;
@@ -128,6 +137,26 @@ body
 	font-size: 30px;
 }
 #editText
+{
+	font-size: 30px;
+}
+#firstNameAdd
+{
+    font-size: 30px;
+}
+#lastNameAdd
+{
+    font-size: 30px;
+}
+#emailAdd
+{
+    font-size: 30px;
+}
+#phoneAdd
+{
+	font-size: 30px;
+}
+#dateAdd
 {
 	font-size: 30px;
 }

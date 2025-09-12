@@ -19,7 +19,9 @@
 	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
 </div>
 
-<div id="accessUIDiv">
+<button type="button" id="aeButton" class="switchButtons" onclick="switchDiv('accessUIDiv','addUIDiv');"> Add/Edit </button>
+
+<div id="accessUIDiv" class="display active">
 	<br />
 
 	<input type="text" id="searchText" placeholder="Contact To Search For"/>
@@ -28,10 +30,6 @@
 	<p id="contactList">
 	</p><br /><br />
 
-	<input type="text" id="addText" placeholder="Contact To Add">
-	<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-	<span id="contactAddResult"></span> <br /><br />
-
 	<input type="text" id="deleteText" placeholder="Contact To Delete">
 	<button type="button" id="deleteContactButton" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
 	<span id="contactDeleteResult"></span> <br /><br />
@@ -39,6 +37,18 @@
 	<input type="text" id="editText" placeholder="Contact To Edit">
 	<button type="button" id="editContactButton" class="buttons" onclick="editContact();"> Edit Contact </button><br />
 	<span id="contactEditResult"></span>
+</div>
+
+<div id="addUIDiv" class="display">
+	<br />
+
+	<input type="text" id="firstNameAdd" placeholder="First Name" /><br />
+	<input type="text" id="lastNameAdd" placeholder="Last Name" /><br />
+	<input type="email" id="emailAdd" placeholder="Email" /><br />
+	<input type="tel" id="phoneAdd" placeholder="Phone Number"/><br />
+	<input type="date" id="dateAdd" placeholder="Current Date"/><br />
+	<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
+	<span id="contactAddResult"></span>
 </div>
 
 </body>
