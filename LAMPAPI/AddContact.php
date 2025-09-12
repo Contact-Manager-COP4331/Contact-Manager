@@ -6,8 +6,17 @@
     $phone     = $inData["phone"];
     $email     = $inData["email"];
     $userId    = $inData["userId"];
+    
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119");
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Valid email format.";
+    } else {
+        echo "Invalid email format.";
+    if (!preg_match('/^\+?[0-9\s\-\(\)]{7,20}$/', $phone)) {
+        returnWithError("Invalid phone number format.");
+    exit;
+}
     if ($conn->connect_error) 
     {
         returnWithError($conn->connect_error);
