@@ -13,7 +13,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?) AND UserID=?");
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ? OR CreatedAt LIKE ? OR UpdatedAt LIKE ?) AND UserID=?");
 		$search = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ssssi", $search, $search, $search, $search, $inData["userId"]);
 		$stmt->execute();
@@ -30,7 +30,9 @@
 			$searchResults .= '{"firstName" : "' . $row["FirstName"]. '", 
                           "lastName" : "' . $row["LastName"]. '",
                           "phone" : "' . $row["Phone"]. '",
-                          "email" : "' . $row["Email"]. '"}';
+                          "email" : "' . $row["Email"]. '",
+						  "createdAt" : "' . $row["CreatedAt"]. '",
+						  "updatedAt" : "' . $row["UpdatedAt"]. '"}';
 		}
 		
 		if( $searchCount == 0 )
