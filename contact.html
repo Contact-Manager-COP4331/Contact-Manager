@@ -9,52 +9,86 @@
 	document.addEventListener('DOMContentLoaded', function() 
 	{
 		readCookie();
+		showSection('readSection');
 	}, false);
 	</script>
 	
 </head>
 <body class="bg-light">
 
-<div id="loggedInDiv" class="card shadow-sm p-3 mb-3">
+<div id="loggedInDiv" class="card shadow-sm p-3 mb-3 d-flex flex-wrap align-items-center justify-content-between">
 	<span id="userName"></span>
-	<button type="button" id="logoutButton" class="btn btn-outline-secondary ms-3" onclick="doLogout();"> Log Out </button>
+	<button type="button" id="logoutButton" class="btn btn-outline-secondary" onclick="doLogout();">Log Out</button>
 </div>
 
-<button type="button" id="aeButton" class="btn btn-outline-secondary w-100 my-3" onclick="switchDiv('accessUIDiv','addUIDiv');"> Add/Edit </button>
+<div class="btn-group w-100 mb-3" role="group" aria-label="Contact actions">
+	<button type="button" class="btn btn-outline-primary flex-fill" onclick="showSection('readSection');">Read</button>
+	<button type="button" class="btn btn-outline-success flex-fill" onclick="showSection('addSection');">Add</button>
+	<button type="button" class="btn btn-outline-danger flex-fill" onclick="showSection('deleteSection');">Delete</button>
+	<button type="button" class="btn btn-outline-warning flex-fill" onclick="showSection('editSection');">Edit</button>
+</div>
 
-<div id="accessUIDiv" class="">
-	<div class="card shadow-sm">
-		<div class="card-body">
-			<input type="text" id="searchText" placeholder="Contact To Search For" class="form-control mb-3"/>
-			<button type="button" id="searchContactButton" class="btn btn-primary w-100 mb-3" onclick="searchContact();"> Search Contact </button>
-			<span id="contactSearchResult" class="d-block mb-3"></span>
-			<p id="contactList" class="mb-4"></p>
-
-			<input type="text" id="deleteText" placeholder="Contact To Delete" class="form-control mb-3">
-			<button type="button" id="deleteContactButton" class="btn btn-danger w-100 mb-3" onclick="deleteContact();"> Delete Contact </button>
-			<span id="contactDeleteResult" class="d-block mb-4"></span>
-
-			<input type="text" id="editText" placeholder="Contact To Edit" class="form-control mb-3">
-			<button type="button" id="editContactButton" class="btn btn-warning w-100 mb-3" onclick="editContact();"> Edit Contact </button>
-			<span id="contactEditResult" class="d-block"></span>
-		</div>
+<div id="readSection" class="card shadow-sm mb-3">
+	<div class="card-body">
+		<input type="text" id="searchText" placeholder="Contact to search for" class="form-control mb-3"/>
+		<button type="button" id="searchContactButton" class="btn btn-primary w-100 mb-3" onclick="searchContact();">Search Contact</button>
+		<span id="contactSearchResult" class="d-block mb-3"></span>
+		<p id="contactList" class="mb-0"></p>
 	</div>
 </div>
 
-<div id="addUIDiv" class="d-none mt-3">
-	<div class="card shadow-sm">
-		<div class="card-body">
-			<input type="text" id="firstNameAdd" placeholder="First Name" class="form-control mb-3"/>
-			<input type="text" id="lastNameAdd" placeholder="Last Name" class="form-control mb-3"/>
-			<input type="email" id="emailAdd" placeholder="Email" class="form-control mb-3"/>
-			<input type="tel" id="phoneAdd" placeholder="Phone Number" class="form-control mb-3"/>
-			<input type="date" id="dateAdd" placeholder="Current Date" class="form-control mb-3"/>
-			<button type="button" id="addContactButton" class="btn btn-success w-100 mb-3" onclick="addContact();"> Add Contact </button>
-			<span id="contactAddResult" class="d-block"></span>
+<div id="addSection" class="card shadow-sm mb-3 d-none">
+	<div class="card-body">
+		<input type="text" id="firstNameAdd" placeholder="First Name" class="form-control mb-3"/>
+		<input type="text" id="lastNameAdd" placeholder="Last Name" class="form-control mb-3"/>
+		<input type="email" id="emailAdd" placeholder="Email" class="form-control mb-3"/>
+		<input type="tel" id="phoneAdd" placeholder="Phone Number" class="form-control mb-3"/>
+		<button type="button" id="addContactButton" class="btn btn-success w-100 mb-3" onclick="addContact();">Add Contact</button>
+		<span id="contactAddResult" class="d-block"></span>
+	</div>
+</div>
+
+<div id="deleteSection" class="card shadow-sm mb-3 d-none">
+	<div class="card-body">
+		<div class="row g-2 mb-3">
+			<div class="col-md-6">
+				<input type="text" id="deleteFirstName" placeholder="First Name" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<input type="text" id="deleteLastName" placeholder="Last Name" class="form-control" />
+			</div>
 		</div>
+		<button type="button" id="deleteContactButton" class="btn btn-danger w-100 mb-3" onclick="deleteContact();">Delete Contact</button>
+		<span id="contactDeleteResult" class="d-block"></span>
+	</div>
+</div>
+
+<div id="editSection" class="card shadow-sm mb-3 d-none">
+	<div class="card-body">
+		<div class="row g-2 mb-3">
+			<div class="col-md-6">
+				<input type="text" id="editOriginalFirstName" placeholder="Current First Name" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<input type="text" id="editOriginalLastName" placeholder="Current Last Name" class="form-control" />
+			</div>
+		</div>
+		<div class="row g-2 mb-3">
+			<div class="col-md-6">
+				<input type="text" id="editFirstName" placeholder="New First Name" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<input type="text" id="editLastName" placeholder="New Last Name" class="form-control" />
+			</div>
+		</div>
+		<input type="email" id="editEmail" placeholder="New Email" class="form-control mb-3" />
+		<input type="tel" id="editPhone" placeholder="New Phone Number" class="form-control mb-3" />
+		<button type="button" id="editContactButton" class="btn btn-warning w-100 mb-3" onclick="editContact();">Edit Contact</button>
+		<span id="contactEditResult" class="d-block"></span>
 	</div>
 </div>
 
 <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

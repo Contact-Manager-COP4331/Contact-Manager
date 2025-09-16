@@ -1,16 +1,12 @@
 <?php
-session_start(); // Identify the logged-in user
-
-// --- 0. Require login ---
-if (!isset($_SESSION['userId'])) {
-    returnWithError("User not signed in.");
-    exit;
-}
-
-$userId = $_SESSION['userId'];
 
 // --- 1. Read and validate input ---
 $inData    = getRequestInfo();
+$userId    = isset($inData["userId"]) ? (int)$inData["userId"] : 0;
+if ($userId <= 0) {
+    returnWithError("Missing or invalid userId.");
+    exit;
+}
 $firstName = trim($inData["firstName"]);
 $lastName  = trim($inData["lastName"]);
 $phone     = trim($inData["phone"]);
@@ -38,9 +34,9 @@ if ($conn->connect_error) {
 // --- 3. Check for duplicates ---
 $check = $conn->prepare(
     "SELECT ID FROM Contacts
-     WHERE FirstName=? AND LastName=? AND Phone=? AND Email=? AND UserID=?"
+     WHERE FirstName=? AND LastName=? AND UserID=?"
 );
-$check->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
+$check->bind_param("ssi", $firstName, $lastName, $userId);
 $check->execute();
 $check->store_result();
 
@@ -53,7 +49,7 @@ if ($check->num_rows > 0) {
 $check->close();
 
 // --- 4. Insert new contact with timestamps ---
-$now = date("Y-m-d H:i:s"); // current date/time for both CreatedAt & UpdatedAt
+$now = date("Y-m-d H:i:s");
 
 $stmt = $conn->prepare(
     "INSERT INTO Contacts
@@ -67,8 +63,8 @@ $stmt->bind_param(
     $phone,
     $email,
     $userId,
-    $now,   // CreatedAt
-    $now    // UpdatedAt (initially same as CreatedAt)
+    $now,
+    $now
 );
 
 if ($stmt->execute()) {
@@ -80,10 +76,6 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 
-
-// ----------------------
-// Helper functions
-// ----------------------
 function getRequestInfo() {
     return json_decode(file_get_contents('php://input'), true);
 }
@@ -98,3 +90,4 @@ function returnWithError($err) {
     sendResultInfoAsJson($retValue);
 }
 ?>
+
