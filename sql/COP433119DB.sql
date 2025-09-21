@@ -16,14 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `COP433119`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `COP433119` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `COP433119`;
-
---
 -- Table structure for table `Contacts`
 --
 
@@ -37,8 +29,10 @@ CREATE TABLE `Contacts` (
   `Phone` varchar(50) NOT NULL DEFAULT '',
   `Email` varchar(50) NOT NULL DEFAULT '',
   `UserID` int NOT NULL DEFAULT '0',
+  `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,9 +47,9 @@ CREATE TABLE `Users` (
   `FirstName` varchar(50) NOT NULL DEFAULT '',
   `LastName` varchar(50) NOT NULL DEFAULT '',
   `Login` varchar(50) NOT NULL DEFAULT '',
-  `Password` varchar(50) NOT NULL DEFAULT '',
+  `Password` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -67,4 +61,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-28 18:03:21
+-- Dump completed on 2025-09-20 23:11:16
