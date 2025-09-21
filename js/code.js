@@ -34,6 +34,40 @@ function showSection(sectionId)
 		}
 	}
 }
+
+document.addEventListener('DOMContentLoaded', function()
+{
+	initializeRequiredFieldIndicators();
+});
+
+function initializeRequiredFieldIndicators()
+{
+	const fields = document.querySelectorAll('.required-field input, .required-field textarea, .required-field select');
+	fields.forEach(function(field)
+	{
+		const wrapper = field.closest('.required-field');
+		if (!wrapper)
+		{
+			return;
+		}
+
+		const updateState = function()
+		{
+			if (field.value && field.value.trim().length > 0)
+			{
+				wrapper.classList.add('has-value');
+			}
+			else
+			{
+				wrapper.classList.remove('has-value');
+			}
+		};
+
+		field.addEventListener('input', updateState);
+		field.addEventListener('change', updateState);
+		updateState();
+	});
+}
 function doRegister()
 {
 	let firstName = document.getElementById("firstName").value;
@@ -549,9 +583,4 @@ function editContact()
 		resultEl.innerHTML = err.message;
 	}
 }
-
-
-
-
-
 

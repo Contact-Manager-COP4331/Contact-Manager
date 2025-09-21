@@ -3,39 +3,51 @@
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">	
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<!-- <body class="bg-light"> -->
 <body>
-<button type="button" id="rlButton" class="btn btn-outline-secondary w-100 my-3" onclick="switchDiv('loginDiv','registerDiv');"> Login/Register </button>
+	<header class="page-header">
+		<img src="images/LogoContactManager.png" alt="Contact Manager logo" class="site-logo" />
+	</header>
 
-<div id="loginDiv" class="d-none">
-	<div class="card shadow-sm">
-		<div class="card-body">
-			<span class="h4 d-block text-center mb-4">LOG IN</span>
-			<input type="text" id="loginName" placeholder="Username" class="form-control mb-3"/>
-			<input type="password" id="loginPassword" placeholder="Password" class="form-control mb-3"/>
-			<button type="button" id="loginButton" class="btn btn-primary w-100" onclick="doLogin();"> Login </button>
-			<div id="loginResult" class="alert alert-danger mt-3 d-none" role="status"></div>
-		</div>
-	</div>
-</div>
+	<main class="page-shell">
+		<section class="card card-surface shadow-sm auth-card p-4">
+			<button type="button" id="rlButton" class="btn btn-outline-primary w-100 mb-4 btn-underline-hover" onclick="switchDiv('loginDiv','registerDiv');"> Login/Register </button>
 
-<div id="registerDiv" class="">
-	<div class="card shadow-sm">
-		<div class="card-body">
-			<span class="h4 d-block text-center mb-4">REGISTER</span>
-			<input type="text" id="firstName" placeholder="First Name" class="form-control mb-3"/>
-			<input type="text" id="lastName" placeholder="Last Name" class="form-control mb-3"/>
-			<input type="text" id="registerName" placeholder="Username" class="form-control mb-3"/>
-			<input type="password" id="registerPassword" placeholder="Password" class="form-control mb-3"/>
-			<button type="button" id="registerButton" class="btn btn-success w-100" onclick="doRegister();"> Register </button>
-			<div id="registerResult" class="alert alert-danger mt-3 d-none" role="status"></div>
-		</div>
-	</div>
-</div>
+			<div id="loginDiv" class="d-none">
+				<span class="h4 d-block mb-4 text-card-heading text-center">LOG IN</span>
+				<div class="required-field mb-3">
+					<input type="text" id="loginName" placeholder="Username" class="form-control styled-input" />
+				</div>
+				<div class="required-field mb-3">
+					<input type="password" id="loginPassword" placeholder="Password" class="form-control styled-input" />
+				</div>
+				<button type="button" id="loginButton" class="btn btn-primary w-100 btn-underline-hover" onclick="doLogin();">Login</button>
+				<div id="loginResult" class="alert alert-custom mt-3 d-none" role="status"></div>
+			</div>
 
-<script src="js/bootstrap.bundle.min.js"></script>
+			<div id="registerDiv">
+				<span class="h4 d-block mb-4 text-card-heading text-center">REGISTER</span>
+				<div class="required-field mb-3">
+					<input type="text" id="firstName" placeholder="First Name" class="form-control styled-input" />
+				</div>
+				<div class="required-field mb-3">
+					<input type="text" id="lastName" placeholder="Last Name" class="form-control styled-input" />
+				</div>
+				<div class="required-field mb-3">
+					<input type="text" id="registerName" placeholder="Username" class="form-control styled-input" />
+				</div>
+				<div class="required-field mb-3">
+					<input type="password" id="registerPassword" placeholder="Password" class="form-control styled-input" />
+				</div>
+				<button type="button" id="registerButton" class="btn btn-primary w-100 btn-underline-hover" onclick="doRegister();">Register</button>
+				<div id="registerResult" class="alert alert-custom mt-3 d-none" role="status"></div>
+			</div>
+		</section>
+	</main>
+
+	<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
