@@ -23,9 +23,9 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     returnWithError("*Invalid email address. Example: user@example.com");
 }
 
-// --- 3. Validate phone number (7–20 chars, digits, +, -, spaces, parentheses) ---
-if (!preg_match('/^\+?[0-9\s\-\(\)]{7,20}$/', $phone)) {
-    returnWithError("*Invalid phone number. Example: 123-456-7890 or +1 (123) 456-7890");
+if (!preg_match('/^\+\d{1,3} \(\d{2,4}\) \d{3}-\d{4}$/', $phone)) {
+    returnWithError("*Invalid phone number. Example: +1 (123) 456-7890");
+    exit;
 }
 
 // --- 4. Connect to database ---
