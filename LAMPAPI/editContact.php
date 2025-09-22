@@ -35,13 +35,13 @@ if ($firstName === '' || $lastName === '' || $phone === '' || $email === '')
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 {
-    returnWithError("Invalid email format.");
+    returnWithError("* Invalid email address. Please use the format: user@example.com");
     exit;
 }
 
 if (!preg_match('/^\+?[0-9\s\-\(\)]{7,20}$/', $phone))
 {
-    returnWithError("Invalid phone number format.");
+    returnWithError("* Invalid phone number. Example: 123-456-7890 of +1 (123) 456–7890.");
     exit;
 }
 
