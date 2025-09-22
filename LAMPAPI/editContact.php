@@ -39,12 +39,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     exit;
 }
 
-if (!preg_match('/^\+?[0-9\s\-\(\)]{7,20}$/', $phone))
-{
-    returnWithError("* Invalid phone number. Example: 123-456-7890 of +1 (123) 456–7890.");
+if (!preg_match('/^\+\d{1,3} \(\d{2,4}\) \d{3}-\d{4}$/', $phone)) {
+    returnWithError("*Invalid phone number. Example: +1 (123) 456-7890 or +44 (020) 123-4567");
     exit;
 }
-
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119");
 if ($conn->connect_error)
 {
