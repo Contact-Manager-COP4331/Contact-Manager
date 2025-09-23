@@ -1,11 +1,9 @@
-
-
 <?php
 session_start(); // Start session to store user info
 
 $inData = getRequestInfo();
 
-$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119"); 
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP433119");
 
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
@@ -22,8 +20,8 @@ if ($conn->connect_error) {
             $_SESSION['firstName'] = $row['firstName'];
             $_SESSION['lastName'] = $row['lastName'];
 
-            // Return user info to front end
-            returnWithInfo($row["firstName"], $row["lastName"], $row["ID"]);
+            // Return user info + login success message
+            returnWithInfo($row["firstName"], $row["lastName"], $row["ID"], "Login successful");
         } else {
             returnWithError("Incorrect password");
         }
@@ -48,13 +46,14 @@ function sendResultInfoAsJson($obj) {
 }
 
 function returnWithError($err) {
-    $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+    $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '","message":""}';
     sendResultInfoAsJson($retValue);
 }
 
-function returnWithInfo($firstName, $lastName, $id) {
-    $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+function returnWithInfo($firstName, $lastName, $id, $message = "") {
+    $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":"","message":"' . $message . '"}';
     sendResultInfoAsJson($retValue);
 }
 ?>
+
 

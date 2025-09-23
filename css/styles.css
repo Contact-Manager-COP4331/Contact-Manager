@@ -1,3 +1,12 @@
+html,body{
+    font-size: 16px !important;
+}
+.form-control,
+.btn,
+.card-surface,
+.auth-card {
+    font-size: 16px !important;
+}
 body {
     background-image: url('../images/Dashboard_Login.jpg');
     background-size: cover;
