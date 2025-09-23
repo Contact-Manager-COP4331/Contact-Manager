@@ -70,16 +70,16 @@ function initializeRequiredFieldIndicators()
 }
 function doRegister()
 {
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let login = document.getElementById("registerName").value;
-	let password = document.getElementById("registerPassword").value;
+	const newFirstName = document.getElementById("firstName").value.trim();
+	const newLastName = document.getElementById("lastName").value.trim();
+	const login = document.getElementById("registerName").value.trim();
+	const password = document.getElementById("registerPassword").value;
 //	var hash = md5( password );
 
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,login:login,password:password};
-//	var tmp = {firstName:firstName,lastName:lastName,login:login,password:hash};
+	let tmp = {firstName:newFirstName,lastName:newLastName,login:login,password:password};
+//	var tmp = {firstName:newFirstName,lastName:newLastName,login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/register.' + extension;
@@ -98,12 +98,12 @@ function doRegister()
 
 				if (!msg.toLowerCase().includes("success"))
 				{
-					document.getElementById("registerResult").innerHTML = "Registration failed";
+					document.getElementById("registerResult").innerHTML = msg || "Registration failed";
 					return;
 				}
 
-				window.firstName = firstName;
-				window.lastName = lastName;
+				firstName = newFirstName;
+				lastName = newLastName;
 
 				saveCookie();
 				window.location.href = "contact.html";
@@ -583,4 +583,5 @@ function editContact()
 		resultEl.innerHTML = err.message;
 	}
 }
+
 
