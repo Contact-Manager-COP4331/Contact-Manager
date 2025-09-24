@@ -1,0 +1,1173 @@
+/* ===================================================================
+   SPECIAL COMPONENTS
+   ================================================================= */
+
+/* Empty State */
+.antarctic-empty-state {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--text-muted);
+}
+
+.antarctic-empty-state .antarctic-empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-md);
+    opacity: 0.5;
+    display: block;
+}
+
+.antarctic-empty-state .antarctic-empty-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text-secondary);
+}
+
+.antarctic-empty-state .antarctic-empty-message {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* Notification/Alert Components */
+.antarctic-alert {
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    border-left: 4px solid;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+}
+
+.antarctic-alert-success {
+    border-left-color: var(--accent-success);
+    background: rgba(72, 187, 120, 0.1);
+}
+
+.antarctic-alert-warning {
+    border-left-color: var(--accent-warning);
+    background: rgba(237, 137, 54, 0.1);
+}
+
+.antarctic-alert-danger {
+    border-left-color: var(--accent-danger);
+    background: rgba(245, 101, 101, 0.1);
+}
+
+.antarctic-alert-info {
+    border-left-color: var(--accent-ice);
+    background: rgba(135, 206, 235, 0.1);
+}
+
+/* Badge/Tag Component */
+.antarctic-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+}
+
+.antarctic-badge-primary {
+    background: rgba(135, 206, 235, 0.3);
+    border-color: var(--accent-ice);
+    color: var(--accent-ice);
+}
+
+.antarctic-badge-success {
+    background: rgba(72, 187, 120, 0.3);
+    border-color: var(--accent-success);
+    color: var(--accent-success);
+}
+
+.antarctic-badge-danger {
+    background: rgba(245, 101, 101, 0.3);
+    border-color: var(--accent-danger);
+    color: var(--accent-danger);
+}
+
+/* Progress Bar */
+.antarctic-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--glass-bg);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: var(--space-sm) 0;
+}
+
+.antarctic-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--antarctic-ice-blue), var(--antarctic-sky-blue));
+    border-radius: var(--radius-sm);
+    transition: width 0.6s ease;
+    position: relative;
+}
+
+.antarctic-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Tooltip */
+.antarctic-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.antarctic-tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--text-primary);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.antarctic-tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+.antarctic-tooltip:hover .antarctic-tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Dropdown Menu */
+.antarctic-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.antarctic-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: var(--glass-bg);
+}
+
+   /* ANTARCTIC THEME CSS
+   A comprehensive stylesheet for Antarctic-themed web applications
+   ================================================================= */
+
+/* ===================================================================
+   RESET & BASE STYLES
+   ================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    background-image: 
+        linear-gradient(135deg, rgba(15, 20, 25, 0.8) 0%, rgba(26, 35, 50, 0.6) 25%),
+        linear-gradient(45deg, #2d4663 50%, #4a7ba7 75%, #87ceeb 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===================================================================
+   ANTARCTIC COLOR PALETTE
+   ================================================================= */
+
+:root {
+    /* Primary Antarctic Colors */
+    --antarctic-deep-blue: #0f1419;
+    --antarctic-night-blue: #1a2332;
+    --antarctic-glacier-blue: #2d4663;
+    --antarctic-ice-blue: #4a7ba7;
+    --antarctic-sky-blue: #87ceeb;
+    
+    /* Aurora Colors */
+    --aurora-teal: rgba(64, 224, 208, 0.3);
+    --aurora-light-blue: rgba(173, 216, 230, 0.4);
+    --aurora-sky: rgba(135, 206, 235, 0.3);
+    
+    /* Glass Effects */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-hover: rgba(255, 255, 255, 0.15);
+    --glass-active: rgba(255, 255, 255, 0.2);
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --text-disabled: rgba(255, 255, 255, 0.4);
+    
+    /* Accent Colors */
+    --accent-ice: #87ceeb;
+    --accent-aurora: #40e0d0;
+    --accent-success: rgba(72, 187, 120, 0.8);
+    --accent-warning: rgba(237, 137, 54, 0.8);
+    --accent-danger: rgba(245, 101, 101, 0.8);
+    
+    /* Shadows */
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --shadow-aurora: 0 0 20px rgba(135, 206, 235, 0.5);
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+}
+
+/* ===================================================================
+   ANIMATED BACKGROUNDS
+   ================================================================= */
+
+/* Aurora Borealis Effect */
+.aurora {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.aurora::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(90deg, transparent, var(--aurora-teal), var(--aurora-light-blue), var(--aurora-sky), transparent);
+    animation: auroraMove 8s ease-in-out infinite alternate;
+    transform: skewY(-5deg);
+}
+
+.aurora::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(90deg, transparent, var(--aurora-light-blue), var(--aurora-sky), transparent);
+    animation: auroraMove 12s ease-in-out infinite alternate-reverse;
+    transform: skewY(3deg);
+}
+
+@keyframes auroraMove {
+    0% { 
+        transform: translateX(-10%) skewY(-5deg); 
+        opacity: 0.6; 
+    }
+    50% { 
+        transform: translateX(0%) skewY(-2deg); 
+        opacity: 0.8; 
+    }
+    100% { 
+        transform: translateX(10%) skewY(-5deg); 
+        opacity: 0.6; 
+    }
+}
+
+/* Subtle Aurora Variant */
+.aurora-subtle::before {
+    top: 15%;
+    height: 35%;
+    background: linear-gradient(90deg, transparent, rgba(64, 224, 208, 0.2), rgba(173, 216, 230, 0.3), rgba(135, 206, 235, 0.2), transparent);
+    animation: auroraMoveSubtle 10s ease-in-out infinite alternate;
+    transform: skewY(-3deg);
+}
+
+@keyframes auroraMoveSubtle {
+    0% { 
+        transform: translateX(-15%) skewY(-3deg); 
+        opacity: 0.4; 
+    }
+    100% { 
+        transform: translateX(15%) skewY(-3deg); 
+        opacity: 0.7; 
+    }
+}
+
+/* ===================================================================
+   FLOATING PARTICLES & ANIMATIONS
+   ================================================================= */
+
+/* Ice Crystals */
+.ice-crystal {
+    position: absolute;
+    color: var(--text-disabled);
+    font-size: 12px;
+    animation: float 6s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+}
+
+.ice-crystal:nth-child(odd) {
+    animation-delay: -2s;
+    animation-duration: 8s;
+}
+
+.ice-crystal:nth-child(even) {
+    animation-delay: -4s;
+    animation-duration: 10s;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.6; 
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg); 
+        opacity: 1; 
+    }
+}
+
+/* Snowflakes */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: var(--text-secondary);
+    user-select: none;
+    pointer-events: none;
+    z-index: 3;
+    animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===================================================================
+   LAYOUT COMPONENTS
+   ================================================================= */
+
+/* Container */
+.antarctic-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+}
+
+.antarctic-container-fluid {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: var(--space-xl);
+}
+
+/* Grid System */
+.antarctic-grid {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.antarctic-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.antarctic-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.antarctic-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.antarctic-grid-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.antarctic-grid-auto-sm { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.antarctic-grid-auto-lg { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+
+/* Flex Utilities */
+.antarctic-flex { display: flex; }
+.antarctic-flex-col { flex-direction: column; }
+.antarctic-flex-center { justify-content: center; align-items: center; }
+.antarctic-flex-between { justify-content: space-between; align-items: center; }
+.antarctic-flex-end { justify-content: flex-end; align-items: center; }
+
+/* ===================================================================
+   GLASS MORPHISM CARDS
+   ================================================================= */
+
+.antarctic-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+}
+
+.antarctic-glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.antarctic-glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    border-color: rgba(135, 206, 235, 0.4);
+    background: var(--glass-hover);
+}
+
+.antarctic-glass-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+/* Enhanced Glass Effects */
+.antarctic-glass-intense {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.antarctic-glass-subtle {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================================================
+   TYPOGRAPHY
+   ================================================================= */
+
+.antarctic-title {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    text-shadow: var(--shadow-aurora);
+    text-align: center;
+}
+
+.antarctic-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+.antarctic-heading-1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.antarctic-heading-2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.antarctic-heading-3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+.antarctic-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.antarctic-text-muted {
+    color: var(--text-muted);
+}
+
+.antarctic-text-small {
+    font-size: 0.875rem;
+}
+
+.antarctic-text-large {
+    font-size: 1.125rem;
+}
+
+/* ===================================================================
+   BUTTONS
+   ================================================================= */
+
+.antarctic-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Primary Button */
+.antarctic-btn-primary {
+    background: linear-gradient(135deg, var(--antarctic-ice-blue), var(--antarctic-sky-blue));
+    color: var(--text-primary);
+    box-shadow: var(--shadow-light);
+}
+
+.antarctic-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(135, 206, 235, 0.3);
+    background: linear-gradient(135deg, #5a8bb7, #97defc);
+}
+
+.antarctic-btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Secondary Button */
+.antarctic-btn-secondary {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+}
+
+.antarctic-btn-secondary:hover {
+    background: var(--glass-hover);
+    border-color: rgba(135, 206, 235, 0.4);
+}
+
+/* Ghost Button */
+.antarctic-btn-ghost {
+    background: transparent;
+    color: var(--accent-ice);
+    border: 1px solid var(--accent-ice);
+}
+
+.antarctic-btn-ghost:hover {
+    background: var(--accent-ice);
+    color: var(--antarctic-deep-blue);
+}
+
+/* Button Sizes */
+.antarctic-btn-small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+}
+
+.antarctic-btn-large {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    border-radius: var(--radius-lg);
+}
+
+/* Button States */
+.antarctic-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Danger Button */
+.antarctic-btn-danger {
+    background: var(--accent-danger);
+    color: var(--text-primary);
+}
+
+.antarctic-btn-danger:hover {
+    background: rgba(245, 101, 101, 1);
+    transform: translateY(-2px);
+}
+
+/* Success Button */
+.antarctic-btn-success {
+    background: var(--accent-success);
+    color: var(--text-primary);
+}
+
+.antarctic-btn-success:hover {
+    background: rgba(72, 187, 120, 1);
+    transform: translateY(-2px);
+}
+
+/* ===================================================================
+   FORM ELEMENTS
+   ================================================================= */
+
+.antarctic-form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.antarctic-form-label {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.antarctic-form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Make placeholder text highly visible */
+.antarctic-form-input::placeholder,
+.antarctic-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.9) !important; /* Very high opacity white */
+    font-weight: 500; /* Slightly bolder */
+}
+
+/* Enhanced search prompt styling for maximum visibility */
+.search-prompt {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.12) !important; /* More visible background */
+    border-radius: 1rem;
+    border: 1px solid rgba(135, 206, 235, 0.4) !important; /* Brighter border */
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+}
+
+.search-prompt h3 {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.95) !important; /* Nearly white */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important; /* Strong text shadow */
+    font-weight: 600 !important;
+    font-size: 1.4rem !important; /* Slightly larger */
+}
+
+.search-prompt p {
+    color: rgba(255, 255, 255, 0.85) !important; /* Much more visible */
+    font-size: 1rem !important;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important; /* Text shadow for readability */
+}
+
+.search-prompt small {
+    color: rgba(255, 255, 255, 0.8) !important; /* Even small text more visible */
+    font-size: 0.9rem !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+.search-prompt .search-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-shadow: 0 4px 16px rgba(135, 206, 235, 0.6) !important; /* Brighter glow */
+    color: rgba(135, 206, 235, 0.9) !important; /* More vibrant icon */
+}
+
+/* Also enhance the search input itself for better visibility */
+.antarctic-search-input {
+    background: rgba(255, 255, 255, 0.15) !important; /* More visible background */
+    border: 1px solid rgba(255, 255, 255, 0.3) !important; /* Brighter border */
+    color: rgba(255, 255, 255, 0.95) !important; /* Nearly white text */
+}
+
+.antarctic-search-input:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(135, 206, 235, 0.7) !important; /* Bright focus border */
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.2) !important;
+}
+
+/* Make search icon in input more visible too */
+.antarctic-search-icon {
+    color: rgba(255, 255, 255, 0.8) !important; /* Much more visible */
+}
+.antarctic-form-input:focus {
+    outline: none;
+    border-color: rgba(135, 206, 235, 0.6);
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1);
+    background: var(--glass-hover);
+}
+
+.antarctic-form-input:invalid {
+    border-color: var(--accent-danger);
+}
+
+/* Search Input */
+.antarctic-search-container {
+    position: relative;
+}
+
+.antarctic-search-input {
+    width: 100%;
+    padding: 12px 45px 12px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.antarctic-search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Select Input */
+.antarctic-select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.antarctic-select:focus {
+    outline: none;
+    border-color: rgba(135, 206, 235, 0.6);
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1);
+}
+
+/* Textarea */
+.antarctic-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+.antarctic-textarea:focus {
+    outline: none;
+    border-color: rgba(135, 206, 235, 0.6);
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1);
+    background: var(--glass-hover);
+}
+
+/* ===================================================================
+   NAVIGATION
+   ================================================================= */
+
+.antarctic-nav {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.antarctic-nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.antarctic-nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--space-lg);
+}
+
+.antarctic-nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+.antarctic-nav-link:hover,
+.antarctic-nav-link.active {
+    color: var(--text-primary);
+    background: var(--glass-bg);
+}
+
+/* Tab Navigation */
+.antarctic-tab-nav {
+    display: flex;
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+    padding: 4px;
+    margin-bottom: var(--space-xl);
+}
+
+.antarctic-tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.antarctic-tab-btn.active {
+    background: rgba(135, 206, 235, 0.3);
+    color: var(--text-primary);
+    box-shadow: 0 2px 10px rgba(135, 206, 235, 0.2);
+}
+
+/* ===================================================================
+   MODAL SYSTEM
+   ================================================================= */
+
+.antarctic-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.antarctic-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xl);
+}
+
+.antarctic-modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.antarctic-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.antarctic-modal-title {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.antarctic-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+    border-radius: var(--radius-sm);
+}
+
+.antarctic-modal-close:hover {
+    color: var(--text-primary);
+    background: var(--glass-bg);
+}
+
+.antarctic-modal-actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: flex-end;
+    margin-top: var(--space-xl);
+}
+
+/* ===================================================================
+   UTILITY CLASSES
+   ================================================================= */
+
+/* Visibility */
+.antarctic-hidden { display: none !important; }
+.antarctic-visible { display: block !important; }
+
+/* Spacing */
+.antarctic-m-0 { margin: 0 !important; }
+.antarctic-m-1 { margin: var(--space-xs) !important; }
+.antarctic-m-2 { margin: var(--space-sm) !important; }
+.antarctic-m-3 { margin: var(--space-md) !important; }
+.antarctic-m-4 { margin: var(--space-lg) !important; }
+.antarctic-m-5 { margin: var(--space-xl) !important; }
+
+.antarctic-p-0 { padding: 0 !important; }
+.antarctic-p-1 { padding: var(--space-xs) !important; }
+.antarctic-p-2 { padding: var(--space-sm) !important; }
+.antarctic-p-3 { padding: var(--space-md) !important; }
+.antarctic-p-4 { padding: var(--space-lg) !important; }
+.antarctic-p-5 { padding: var(--space-xl) !important; }
+
+/* Margin Top/Bottom */
+.antarctic-mt-1 { margin-top: var(--space-xs) !important; }
+.antarctic-mt-2 { margin-top: var(--space-sm) !important; }
+.antarctic-mt-3 { margin-top: var(--space-md) !important; }
+.antarctic-mt-4 { margin-top: var(--space-lg) !important; }
+.antarctic-mt-5 { margin-top: var(--space-xl) !important; }
+
+.antarctic-mb-1 { margin-bottom: var(--space-xs) !important; }
+.antarctic-mb-2 { margin-bottom: var(--space-sm) !important; }
+.antarctic-mb-3 { margin-bottom: var(--space-md) !important; }
+.antarctic-mb-4 { margin-bottom: var(--space-lg) !important; }
+.antarctic-mb-5 { margin-bottom: var(--space-xl) !important; }
+
+/* Text Alignment */
+.antarctic-text-left { text-align: left !important; }
+.antarctic-text-center { text-align: center !important; }
+.antarctic-text-right { text-align: right !important; }
+
+/* Colors */
+.antarctic-text-primary { color: var(--text-primary) !important; }
+.antarctic-text-secondary { color: var(--text-secondary) !important; }
+.antarctic-text-muted { color: var(--text-muted) !important; }
+.antarctic-text-accent { color: var(--accent-ice) !important; }
+
+/* Background Colors */
+.antarctic-bg-glass { background: var(--glass-bg) !important; }
+.antarctic-bg-glass-hover { background: var(--glass-hover) !important; }
+
+/* Borders */
+.antarctic-border { border: 1px solid var(--glass-border) !important; }
+.antarctic-border-accent { border: 1px solid var(--accent-ice) !important; }
+.antarctic-border-radius { border-radius: var(--radius-md) !important; }
+
+/* Width */
+.antarctic-w-full { width: 100% !important; }
+.antarctic-w-auto { width: auto !important; }
+
+/* Height */
+.antarctic-h-full { height: 100% !important; }
+.antarctic-h-auto { height: auto !important; }
+
+/* ===================================================================
+   STATES & EFFECTS
+   ================================================================= */
+
+/* Loading State */
+.antarctic-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.antarctic-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--accent-ice);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hover Effects */
+.antarctic-hover-lift {
+    transition: transform 0.3s ease;
+}
+
+.antarctic-hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.antarctic-hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.antarctic-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.4);
+}
+
+/* Focus States */
+.antarctic-focus-visible:focus-visible {
+    outline: 2px solid var(--accent-ice);
+    outline-offset: 2px;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   ================================================================= */
+
+@media (max-width: 1200px) {
+    .antarctic-container {
+        max-width: 100%;
+        padding: var(--space-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-xl: 1.5rem;
+        --space-2xl: 2rem;
+    }
+    
+    .antarctic-container {
+        padding: var(--space-md);
+    }
+    
+    .antarctic-grid-2,
+    .antarctic-grid-3,
+    .antarctic-grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .antarctic-title {
+        font-size: 2rem;
+    }
+    
+    .antarctic-heading-1 {
+        font-size: 1.75rem;
+    }
+    
+    .antarctic-modal-content {
+        margin: var(--space-md);
+        padding: var(--space-lg);
+    }
+    
+    .antarctic-nav {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .antarctic-nav-menu {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .antarctic-modal-actions {
+        flex-direction: column;
+    }
+    
+    .antarctic-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .antarctic-title {
+        font-size: 1.75rem;
+    }
+    
+    .antarctic-heading-1 {
+        font-size: 1.5rem;
+    }
+    
+    .antarctic-glass-card {
+        padding: var(--space-lg);
+    }
+    
+    .antarctic-modal-content {
+        padding: var(--space-md);
+    }
+}
+
