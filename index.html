@@ -1,58 +1,154 @@
 <!DOCTYPE html>
-<html lang = "en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Secure login and sign up page to manage your contacts.">
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">	
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	<title> Login/signup page </title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-	<header class="page-header">
-		<img src="images/LogoContactManager 1.png" alt="Contact Manager logo" class="site-logo" />
-	</header>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Secure login and sign up page to manage your contacts."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antarctic Portal</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/Antarctic.css" />
+    <style>
+      /* Additional page-specific styles if needed */
+      .auth-card {
+        width: 100%;
+        max-width: 450px;
+      }
 
-	<main class="page-shell">
-		<section class="card card-surface shadow-sm auth-card p-4">
-			<button type="button" id="rlButton" class="btn btn-outline-primary w-100 mb-4 btn-underline-hover" onclick="switchDiv('loginDiv','registerDiv');"> Login/Register </button>
+      html {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+      }
+      html::-webkit-scrollbar {
+        display: none; /* WebKit browsers */
+      }
+      body {
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Aurora Background -->
+    <div class="aurora"></div>
 
-			<div id="loginDiv" class="d-none">
-				<span class="h4 d-block mb-4 text-card-heading text-center">LOG IN</span>
-				<div class="required-field mb-3">
-					<input type="text" id="loginName" placeholder="Username" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="password" id="loginPassword" placeholder="Password" class="form-control styled-input" />
-				</div>
-				<button type="button" id="loginButton" class="btn btn-primary w-100 btn-underline-hover" onclick="doLogin();">Login</button>
-				<div id="loginResult" class="alert alert-custom mt-3 d-none" role="status"></div>
-			</div>
+    <!-- Floating Ice Crystals -->
+    <div class="ice-crystal" style="top: 10%; left: 10%">❄</div>
+    <div class="ice-crystal" style="top: 20%; right: 15%">✦</div>
+    <div class="ice-crystal" style="top: 60%; left: 5%">❅</div>
+    <div class="ice-crystal" style="top: 80%; right: 20%">❄</div>
 
-			<div id="registerDiv">
-				<span class="h4 d-block mb-4 text-card-heading text-center">REGISTER</span>
-				<div class="required-field mb-3">
-					<input type="text" id="firstName" placeholder="First Name" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="text" id="lastName" placeholder="Last Name" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="text" id="registerName" placeholder="Username" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="password" id="registerPassword" placeholder="Password" class="form-control styled-input" />
-				</div>
-				<button type="button" id="registerButton" class="btn btn-primary w-100 btn-underline-hover" onclick="doRegister();">Register</button>
-				<div id="registerResult" class="alert alert-custom mt-3 d-none" role="status"></div>
-			</div>
-		</section>
-	</main>
+    <div
+      class="antarctic-container antarctic-flex antarctic-flex-center"
+      style="min-height: 100vh"
+    >
+      <div class="antarctic-glass-card auth-card antarctic-hover-lift">
+        <div class="antarctic-text-center antarctic-mb-5">
+          <div class="antarctic-title">🐧 ANTARCTIC JOURNEY</div>
+          <div class="antarctic-subtitle">Explore the Frozen Frontier</div>
+        </div>
 
-	<script src="js/bootstrap.bundle.min.js"></script>
-</body>
+        <div class="antarctic-tab-nav">
+          <button class="antarctic-tab-btn active" onclick="switchTab('login')">
+            LOGIN
+          </button>
+          <button class="antarctic-tab-btn" onclick="switchTab('register')">
+            REGISTER
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form">
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Username</label>
+            <input
+              type="text"
+              id="loginName"
+              class="antarctic-form-input"
+              placeholder="Enter your Username"
+              required
+            />
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="antarctic-form-input"
+              placeholder="Enter your Password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="antarctic-btn antarctic-btn-primary antarctic-w-full"
+          >
+            ENTER THE ICE
+          </button>
+          <div id="loginResult"></div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form antarctic-hidden">
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              class="antarctic-form-input"
+              placeholder="Enter your First name"
+              required
+            />
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              class="antarctic-form-input"
+              placeholder="Enter your Last name"
+              required
+            />
+          </div>
+
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Username</label>
+            <input
+              type="text"
+              id="registerName"
+              class="antarctic-form-input"
+              placeholder="Choose a Username"
+              required
+            />
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              class="antarctic-form-input"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="antarctic-btn antarctic-btn-primary antarctic-w-full"
+          >
+            JOIN THE EXPEDITION
+          </button>
+          <div id="registerResult"></div>
+        </form>
+      </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
-

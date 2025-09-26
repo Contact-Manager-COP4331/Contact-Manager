@@ -1,133 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="js/code.js"></script>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-		showSection('readSection');
-	}, false);
-	</script>
-	<title>Landing Page </title>
-	<meta name="landing page where you can add, edit, delete, or search contacts">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-	<header class="page-header">
-		<img src="images/LogoContactManager 1.png" alt="Contact Manager logo" class="site-logo" />
-	</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antarctic Contact Station</title>
+    <link rel="stylesheet" href="css/Antarctic.css" />
+    <script type="text/javascript" src="js/code.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <style>
+      /* Page-specific additions */
+      .contact-card {
+        transition: all 0.3s ease;
+      }
 
-	<main class="page-shell">
-		<div id="loggedInDiv" class="card card-surface shadow-sm mb-4">
-			<div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3">
-				<span id="userName" class="fw-semibold"></span>
-				<button type="button" id="logoutButton" class="btn btn-outline-primary btn-underline-hover" onclick="doLogout();">Log Out</button>
-			</div>
-		</div>
+      .contact-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(135, 206, 235, 0.3);
+      }
 
-		<div class="btn-group w-100 mb-4" role="group" aria-label="Contact actions">
-			<button type="button" class="btn btn-outline-primary flex-fill btn-underline-hover" onclick="showSection('readSection');">Read</button>
-			<button type="button" class="btn btn-outline-primary flex-fill btn-underline-hover" onclick="showSection('addSection');">Add</button>
-			<button type="button" class="btn btn-outline-primary flex-fill btn-underline-hover" onclick="showSection('deleteSection');">Delete</button>
-			<button type="button" class="btn btn-outline-primary flex-fill btn-underline-hover" onclick="showSection('editSection');">Edit</button>
-		</div>
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
 
-		<div id="readSection" class="card card-surface shadow-sm mb-4">
-			<div class="card-body">
-				<span class="section-heading">Read Contacts</span>
-				<div class="required-field mb-3 mt-2">
-					<input type="text" id="searchText" placeholder="Contact to search for" class="form-control styled-input" />
-				</div>
-				<button type="button" id="searchContactButton" class="btn btn-primary w-100 mb-3 btn-underline-hover" onclick="searchContact();">Search Contacts</button>
-				<span id="contactSearchResult" class="status-text mb-3"></span>
-				<p id="contactList" class="contact-list mb-0"></p>
-			</div>
-		</div>
+      .contact-icon {
+        font-size: 1.1rem;
+        color: var(--accent-ice);
+        width: 20px;
+      }
 
-		<div id="addSection" class="card card-surface shadow-sm mb-4 d-none">
-			<div class="card-body">
-				<span class="section-heading">Add Contact</span>
-				<div class="required-field mb-3 mt-2">
-					<input type="text" id="firstNameAdd" placeholder="First Name" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="text" id="lastNameAdd" placeholder="Last Name" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="email" id="emailAdd" placeholder="Email" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="tel" id="phoneAdd" placeholder="Phone Number" class="form-control styled-input" />
-				</div>
-				<button type="button" id="addContactButton" class="btn btn-primary w-100 mb-3 btn-underline-hover" onclick="addContact();">Add Contact</button>
-				<span id="contactAddResult" class="status-text"></span>
-			</div>
-		</div>
+      html {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+      }
+      html::-webkit-scrollbar {
+        display: none; /* WebKit browsers */
+      }
+      body {
+        overflow-x: hidden;
+      }
 
-		<div id="deleteSection" class="card card-surface shadow-sm mb-4 d-none">
-			<div class="card-body">
-				<span class="section-heading">Delete Contact</span>
-				<div class="row g-3 mt-2 mb-3">
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="deleteFirstName" placeholder="First Name" class="form-control styled-input" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="deleteLastName" placeholder="Last Name" class="form-control styled-input" />
-						</div>
-					</div>
-				</div>
-				<button type="button" id="deleteContactButton" class="btn btn-primary w-100 mb-3 btn-underline-hover" onclick="deleteContact();">Delete Contact</button>
-				<span id="contactDeleteResult" class="status-text"></span>
-			</div>
-		</div>
+      /* Search container styling */
+      .search-container {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+      }
 
-		<div id="editSection" class="card card-surface shadow-sm mb-4 d-none">
-			<div class="card-body">
-				<span class="section-heading">Edit Contact</span>
-				<div class="row g-3 mt-2 mb-3">
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="editOriginalFirstName" placeholder="Current First Name" class="form-control styled-input" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="editOriginalLastName" placeholder="Current Last Name" class="form-control styled-input" />
-						</div>
-					</div>
-				</div>
-				<div class="row g-3 mb-3">
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="editFirstName" placeholder="New First Name" class="form-control styled-input" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="required-field h-100">
-							<input type="text" id="editLastName" placeholder="New Last Name" class="form-control styled-input" />
-						</div>
-					</div>
-				</div>
-				<div class="required-field mb-3">
-					<input type="email" id="editEmail" placeholder="New Email" class="form-control styled-input" />
-				</div>
-				<div class="required-field mb-3">
-					<input type="tel" id="editPhone" placeholder="New Phone Number" class="form-control styled-input" />
-				</div>
-				<button type="button" id="editContactButton" class="btn btn-primary w-100 mb-3 btn-underline-hover" onclick="editContact();">Edit Contact</button>
-				<span id="contactEditResult" class="status-text"></span>
-			</div>
-		</div>
-	</main>
+      .search-prompt {
+        text-align: center;
+        padding: 3rem;
+        color: #64748b;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        border: 1px solid rgba(135, 206, 235, 0.2);
+        backdrop-filter: blur(10px);
+      }
 
-	<script src="js/bootstrap.bundle.min.js"></script>
-</body>
+      .search-container .antarctic-search-input {
+        flex: 3; /* Takes 3/4 of available space */
+        margin: 0;
+        min-width: 200px; /* Minimum width to stay readable */
+      }
+
+      .search-container .antarctic-btn {
+        flex: 1; /* Takes 1/4 of available space */
+        max-width: 120px; /* Prevents search button from getting too wide */
+        min-width: 80px; /* Ensures button stays usable */
+        white-space: nowrap; /* Prevents text wrapping */
+      }
+
+      /* Control panel adjustments */
+      .control-panel {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .control-panel {
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
+        }
+
+        .search-container .antarctic-search-input {
+          flex: 2; /* Slightly less space on mobile but still larger */
+          min-width: 150px;
+        }
+
+        .search-container .antarctic-btn {
+          flex: 1;
+          max-width: 100px;
+          min-width: 70px;
+          font-size: 0.875rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .search-container .antarctic-search-input {
+          flex: 2;
+          min-width: 120px;
+        }
+
+        .search-container .antarctic-btn {
+          flex: 1;
+          max-width: 80px;
+          min-width: 60px;
+          font-size: 0.75rem;
+          padding: 0.5rem 0.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Aurora Background -->
+    <div class="aurora aurora-subtle"></div>
+
+    <!-- Floating Ice Crystals -->
+    <div class="ice-crystal" style="top: 15%; left: 10%; animation-delay: -1s">
+      ❄
+    </div>
+    <div class="ice-crystal" style="top: 25%; right: 15%; animation-delay: -3s">
+      ✦
+    </div>
+    <div class="ice-crystal" style="top: 70%; left: 5%; animation-delay: -2s">
+      ❅
+    </div>
+    <div class="ice-crystal" style="top: 80%; right: 20%; animation-delay: -4s">
+      ❄
+    </div>
+
+    <div class="antarctic-container">
+      <!-- Header -->
+      <div class="antarctic-glass-header">
+        <h1 class="antarctic-title">🧊 Antarctic Contact Station</h1>
+        <p class="antarctic-subtitle">
+          Managing Connections Across the Frozen Frontier
+        </p>
+        <div class="user-info" id="userName">
+          <!-- User info will be displayed here -->
+        </div>
+        <button
+          class="antarctic-btn antarctic-btn-secondary"
+          onclick="doLogout()"
+          style="margin-top: 0.5rem"
+        >
+          🚪 Exit Station
+        </button>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="control-panel">
+        <div class="search-container">
+          <div
+            class="antarctic-search-container"
+            style="flex: 1; position: relative"
+          >
+            <input
+              type="text"
+              class="antarctic-search-input"
+              id="searchInput"
+              placeholder="Search contacts by name, email, or phone..."
+              onkeydown="if(event.key==='Enter') searchContact()"
+            />
+          </div>
+          <button
+            class="antarctic-btn antarctic-btn-primary"
+            onclick="searchContact()"
+            title="Search contacts"
+          >
+            🔍 Search
+          </button>
+        </div>
+
+        <button
+          class="antarctic-btn antarctic-btn-primary"
+          onclick="openAddModal()"
+        >
+          ➕ Add Contact
+        </button>
+
+        <button
+          class="antarctic-btn antarctic-btn-secondary"
+          onclick="clearSearch()"
+        >
+          ❄️ Clear
+        </button>
+      </div>
+
+      <!-- Contacts Grid -->
+      <div class="antarctic-grid antarctic-grid-auto-lg" id="contactsGrid">
+        <!-- Initial search prompt -->
+        <div class="search-prompt">
+          <div class="search-icon">🔍</div>
+          <h3>Search Your Antarctic Contact Station</h3>
+          <p>
+            Use the search box above to find contacts, or search with an empty
+            query to view all contacts.
+          </p>
+          <p>
+            <small
+              >Press Enter in the search box or click the Search button to
+              begin.</small
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="antarctic-empty-state antarctic-hidden" id="emptyState">
+        <div class="antarctic-empty-icon">🏔️</div>
+        <h3 class="antarctic-empty-title">No contacts found</h3>
+        <p class="antarctic-empty-message">
+          The Ice Fields are Empty. Try a different search term or add your
+          first contact!
+        </p>
+      </div>
+    </div>
+
+    <!-- Add/Edit Contact Modal -->
+    <div class="antarctic-modal" id="contactModal">
+      <div class="antarctic-modal-content">
+        <div class="antarctic-modal-header">
+          <h2 class="antarctic-modal-title" id="modalTitle">Add New Contact</h2>
+          <button class="antarctic-modal-close" onclick="closeModal()">
+            &times;
+          </button>
+        </div>
+        <form id="contactForm">
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">First Name *</label>
+            <input
+              type="text"
+              class="antarctic-form-input"
+              id="firstName"
+              placeholder="Enter first name"
+              pattern="[A-Za-z\s\-']+"
+              title="First name should only contain letters, spaces, hyphens, and apostrophes"
+              required
+            />
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Last Name *</label>
+            <input
+              type="text"
+              class="antarctic-form-input"
+              id="lastName"
+              placeholder="Enter last name"
+              pattern="[A-Za-z\s\-']+"
+              title="Last name should only contain letters, spaces, hyphens, and apostrophes"
+              required
+            />
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Email Address *</label>
+            <input
+              type="email"
+              class="antarctic-form-input"
+              id="email"
+              placeholder="user@example.com"
+              title="Please enter a valid email address"
+              required
+            />
+            <div class="format-helper">Format: user@example.com</div>
+          </div>
+          <div class="antarctic-form-group">
+            <label class="antarctic-form-label">Phone Number *</label>
+            <input
+              type="tel"
+              class="antarctic-form-input"
+              id="phone"
+              placeholder="+1 (123) 456-7890"
+              pattern="^\+\d{1,3} \(\d{2,4}\) \d{3}-\d{4}$"
+              title="Phone number must be in format: +1 (123) 456-7890"
+              oninput="formatPhoneNumber(this)"
+              required
+            />
+            <div class="format-helper">Format: +1 (123) 456-7890</div>
+          </div>
+          <div class="antarctic-modal-actions">
+            <button
+              type="button"
+              class="antarctic-btn antarctic-btn-secondary"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="antarctic-btn antarctic-btn-primary"
+              id="submitBtn"
+            >
+              Save Contact
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Phone number formatting function
+      function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, ""); // Remove non-digits
+
+        if (value.length === 0) {
+          input.value = "";
+          return;
+        }
+
+        // Add country code if not present
+        if (!value.startsWith("1") && value.length === 10) {
+          value = "1" + value;
+        }
+
+        // Format based on length
+        if (value.length >= 1) {
+          if (value.length <= 4) {
+            input.value = "+" + value;
+          } else if (value.length <= 7) {
+            input.value =
+              "+" +
+              value.slice(0, 1) +
+              " (" +
+              value.slice(1, 4) +
+              ") " +
+              value.slice(4);
+          } else if (value.length <= 11) {
+            input.value =
+              "+" +
+              value.slice(0, 1) +
+              " (" +
+              value.slice(1, 4) +
+              ") " +
+              value.slice(4, 7) +
+              "-" +
+              value.slice(7, 11);
+          }
+        }
+      }
+
+      // Validate form before submission
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            const phoneInput = document.getElementById("phone");
+            const emailInput = document.getElementById("email");
+
+            // Additional validation
+            if (
+              phoneInput &&
+              !phoneInput.value.match(/^\+\d{1,3} \(\d{2,4}\) \d{3}-\d{4}$/)
+            ) {
+              e.preventDefault();
+              alert("Please enter phone number in format: +1 (123) 456-7890");
+              return false;
+            }
+
+            if (emailInput && !emailInput.validity.valid) {
+              e.preventDefault();
+              alert("Please enter a valid email address");
+              return false;
+            }
+          });
+        }
+      });
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
